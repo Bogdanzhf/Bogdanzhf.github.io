@@ -1,265 +1,372 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Анализ показателей развития стран — Gapminder</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <header class="hero" id="top">
-    <div
-      class="hero-bg"
-      style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&amp;fit=crop&amp;w=2000&amp;q=80')"
-      role="presentation"
-    ></div>
-    <div class="hero-inner wrap">
-      <div class="badge-row">
-        <span class="badge">Дата-аналитика</span>
-        <span class="badge">Gapminder</span>
-      </div>
-      <h1>Анализ показателей развития стран по данным Gapminder</h1>
-      <p class="lead">
-        Срез 2007 года, динамика 1952–2007, континенты и страны: демография и экономика в одном наборе данных.
-      </p>
-    </div>
-  </header>
-
-  <nav class="topnav" aria-label="Разделы страницы">
-    <div class="wrap">
-      <a href="#vvedenie">Введение</a>
-      <a href="#zadachi">Цели</a>
-      <a href="#gipotezy">Гипотезы</a>
-      <a href="#dannye">Данные</a>
-      <a href="#logika">Ход работы</a>
-      <a href="#rezultaty">Результаты</a>
-      <a href="#proverka">Проверка гипотез</a>
-      <a href="#primnenie">Применение</a>
-      <a href="#istochniki">Источники</a>
-    </div>
-  </nav>
-
-  <main>
-    <section id="vvedenie">
-      <div class="wrap">
-        <h2 class="section-title">Введение</h2>
-        <p class="section-lead">
-          Проект посвящён сопоставлению стран по показателям набора Gapminder: численность населения, ожидаемая продолжительность жизни и ВВП на душу населения в сопоставимых ценах. Ниже приведены материалы расчётов, ключевые таблицы и графики, полученные в ходе анализа.
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Анализ показателей развития стран — Gapminder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero" id="top">
+      <div
+        class="hero-bg"
+        style="
+          background-image: url(&quot;https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&amp;fit=crop&amp;w=2000&amp;q=80&quot;);
+        "
+        role="presentation"></div>
+      <div class="hero-inner wrap">
+        <div class="badge-row">
+          <span class="badge">Дата-аналитика</span>
+          <span class="badge">Gapminder</span>
+        </div>
+        <h1>Анализ показателей развития стран по данным Gapminder</h1>
+        <p class="lead">
+          Срез 2007 года, динамика 1952–2007, континенты и страны: демография и экономика в одном
+          наборе данных.
         </p>
-        <div class="grid-2">
-          <div class="card">
-            <h3>Материалы проекта</h3>
-            <ul class="links-list">
-              <li><a href="../проект_анализ_gapminder.ipynb">файл с кодом и аналитической запиской</a></li>
-              <li><a href="../rezultaty_gapminder_2007.xlsx">таблицы результатов</a></li>
-              <li><a href="../data_gapminder.csv">исходные данные</a></li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Объём данных</h3>
-            <ul>
-              <li>1704 наблюдения, 142 страны, шаг по времени пять лет;</li>
-              <li>основной срез для сравнения стран — 2007 год;</li>
-              <li>для оценки изменений используется также 1952 год.</li>
-            </ul>
+      </div>
+    </header>
+
+    <nav class="topnav" aria-label="Разделы страницы">
+      <div class="wrap">
+        <a href="#vvedenie">Введение</a>
+        <a href="#zadachi">Цели</a>
+        <a href="#gipotezy">Гипотезы</a>
+        <a href="#dannye">Данные</a>
+        <a href="#logika">Ход работы</a>
+        <a href="#rezultaty">Результаты</a>
+        <a href="#proverka">Проверка гипотез</a>
+        <a href="#primnenie">Применение</a>
+        <a href="#istochniki">Источники</a>
+      </div>
+    </nav>
+
+    <main>
+      <section id="vvedenie">
+        <div class="wrap">
+          <h2 class="section-title">Введение</h2>
+          <p class="section-lead">
+            Проект посвящён сопоставлению стран по показателям набора Gapminder: численность
+            населения, ожидаемая продолжительность жизни и ВВП на душу населения в сопоставимых
+            ценах. Ниже приведены материалы расчётов, ключевые таблицы и графики, полученные в ходе
+            анализа.
+          </p>
+          <div class="grid-2">
+            <div class="card">
+              <h3>Материалы проекта</h3>
+              <ul class="links-list">
+                <li>
+                  <a href="../проект_анализ_gapminder.ipynb"
+                    >файл с кодом и аналитической запиской</a
+                  >
+                </li>
+                <li><a href="../rezultaty_gapminder_2007.xlsx">таблицы результатов</a></li>
+                <li><a href="../data_gapminder.csv">исходные данные</a></li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Объём данных</h3>
+              <ul>
+                <li>1704 наблюдения, 142 страны, шаг по времени пять лет;</li>
+                <li>основной срез для сравнения стран — 2007 год;</li>
+                <li>для оценки изменений используется также 1952 год.</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="zadachi">
-      <div class="wrap">
-        <h2 class="section-title">Цель и содержание анализа</h2>
-        <p class="section-lead">
-          На панели Gapminder рассматривались численность населения, ожидаемая продолжительность жизни и ВВП на душу населения. Использованы описательные статистики, группировки, рейтинги и графики. Итоги сопоставляются с тремя исследовательскими гипотезами, сформулированными в аналитической записке расчётного файла проекта.
-        </p>
-        <div class="figure-strip">
-          <div>
-            <img
-              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&amp;fit=crop&amp;w=1200&amp;q=80"
-              width="1200"
-              height="800"
-              loading="lazy"
-              alt=""
-            />
-          </div>
-          <div class="card">
-            <h3>Основные шаги</h3>
-            <ul>
-              <li>срезы за 2007 и 1952 годы и сопоставление;</li>
-              <li>агрегирование по континентам, в том числе среднее взвешенное по населению;</li>
-              <li>рейтинги стран по продолжительности жизни и по ВВП на душу населения;</li>
-              <li>динамика средних значений по годам и по выбранным странам;</li>
-              <li>визуализация и выгрузка итоговых таблиц.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="gipotezy">
-      <div class="wrap">
-        <h2 class="section-title">Исследовательские гипотезы</h2>
-        <div class="card" style="max-width: 900px">
-          <p><strong>Гипотеза 1.</strong> Средняя по всем странам набора ожидаемая продолжительность жизни не убывает при переходе от каждого пятилетнего шага к следующему на интервале 1952–2007 годов.</p>
-          <p><strong>Гипотеза 2.</strong> На срезе 2007 года взвешенное по численности населения стран среднее значение продолжительности жизни для континента «Африка» ниже, чем для континента «Европа».</p>
-          <p style="margin-bottom: 0"><strong>Гипотеза 3.</strong> Среди пятнадцати стран с наибольшим абсолютным приростом ожидаемой продолжительности жизни между 1952 и 2007 годами не менее половины являются странами Азии или Африки.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="dannye">
-      <div class="wrap">
-        <h2 class="section-title">Данные и ссылки</h2>
-        <p class="section-lead">
-          Набор gapminderDataFiveYear.csv содержит 1704 строки: 142 страны и 12 временных точек. Для 2007 года в анализе участвуют 142 страны. Средняя продолжительность жизни по всем странам на срезе 2007 года составляет около 67,0 лет.
-        </p>
-        <div class="grid-2">
-          <div class="card">
-            <h3>Внешние источники</h3>
-            <ul class="links-list">
-              <li><a href="https://www.gapminder.org/">Gapminder</a></li>
-              <li><a href="https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv">CSV (Plotly Datasets)</a></li>
-              <li><a href="https://www.kaggle.com/datasets/mamarhabtamu/gapminder-five-year-data">Kaggle</a></li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Лидеры 2007 года по продолжительности жизни</h3>
-            <table class="results">
-              <thead>
-                <tr><th>Страна</th><th>Лет</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Japan</td><td>82,6</td></tr>
-                <tr><td>Hong Kong, China</td><td>82,2</td></tr>
-                <tr><td>Iceland</td><td>81,8</td></tr>
-              </tbody>
-            </table>
+      <section id="zadachi">
+        <div class="wrap">
+          <h2 class="section-title">Цель и содержание анализа</h2>
+          <p class="section-lead">
+            На панели Gapminder рассматривались численность населения, ожидаемая продолжительность
+            жизни и ВВП на душу населения. Использованы описательные статистики, группировки,
+            рейтинги и графики. Итоги сопоставляются с тремя исследовательскими гипотезами,
+            сформулированными в аналитической записке расчётного файла проекта.
+          </p>
+          <div class="figure-strip">
+            <div>
+              <img
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&amp;fit=crop&amp;w=1200&amp;q=80"
+                width="1200"
+                height="800"
+                loading="lazy"
+                alt="" />
+            </div>
+            <div class="card">
+              <h3>Основные шаги</h3>
+              <ul>
+                <li>срезы за 2007 и 1952 годы и сопоставление;</li>
+                <li>агрегирование по континентам, в том числе среднее взвешенное по населению;</li>
+                <li>рейтинги стран по продолжительности жизни и по ВВП на душу населения;</li>
+                <li>динамика средних значений по годам и по выбранным странам;</li>
+                <li>визуализация и выгрузка итоговых таблиц.</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="logika">
-      <div class="wrap">
-        <h2 class="section-title">Ход обработки данных</h2>
-        <p class="section-lead">
-          Данные загружаются в таблицу, отбираются нужные годы, строятся группировки и сводные показатели, затем визуализация средствами matplotlib и seaborn и запись листов в файл Excel. Порядок шагов в расчётном файле проекта соответствует приведённой схеме.
-        </p>
-        <div class="card">
-          <h3>Схема пайплайна</h3>
-          <pre class="code">загрузка CSV → проверка типов и пропусков
+      <section id="gipotezy">
+        <div class="wrap">
+          <h2 class="section-title">Исследовательские гипотезы</h2>
+          <div class="card" style="max-width: 900px">
+            <p>
+              <strong>Гипотеза 1.</strong> Средняя по всем странам набора ожидаемая
+              продолжительность жизни не убывает при переходе от каждого пятилетнего шага к
+              следующему на интервале 1952–2007 годов.
+            </p>
+            <p>
+              <strong>Гипотеза 2.</strong> На срезе 2007 года взвешенное по численности населения
+              стран среднее значение продолжительности жизни для континента «Африка» ниже, чем для
+              континента «Европа».
+            </p>
+            <p style="margin-bottom: 0">
+              <strong>Гипотеза 3.</strong> Среди пятнадцати стран с наибольшим абсолютным приростом
+              ожидаемой продолжительности жизни между 1952 и 2007 годами не менее половины являются
+              странами Азии или Африки.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="dannye">
+        <div class="wrap">
+          <h2 class="section-title">Данные и ссылки</h2>
+          <p class="section-lead">
+            Набор gapminderDataFiveYear.csv содержит 1704 строки: 142 страны и 12 временных точек.
+            Для 2007 года в анализе участвуют 142 страны. Средняя продолжительность жизни по всем
+            странам на срезе 2007 года составляет около 67,0 лет.
+          </p>
+          <div class="grid-2">
+            <div class="card">
+              <h3>Внешние источники</h3>
+              <ul class="links-list">
+                <li><a href="https://www.gapminder.org/">Gapminder</a></li>
+                <li>
+                  <a
+                    href="https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv"
+                    >CSV (Plotly Datasets)</a
+                  >
+                </li>
+                <li>
+                  <a href="https://www.kaggle.com/datasets/mamarhabtamu/gapminder-five-year-data"
+                    >Kaggle</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Лидеры 2007 года по продолжительности жизни</h3>
+              <table class="results">
+                <thead>
+                  <tr>
+                    <th>Страна</th>
+                    <th>Лет</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Japan</td>
+                    <td>82,6</td>
+                  </tr>
+                  <tr>
+                    <td>Hong Kong, China</td>
+                    <td>82,2</td>
+                  </tr>
+                  <tr>
+                    <td>Iceland</td>
+                    <td>81,8</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="logika">
+        <div class="wrap">
+          <h2 class="section-title">Ход обработки данных</h2>
+          <p class="section-lead">
+            Данные загружаются в таблицу, отбираются нужные годы, строятся группировки и сводные
+            показатели, затем визуализация средствами matplotlib и seaborn и запись листов в файл
+            Excel. Порядок шагов в расчётном файле проекта соответствует приведённой схеме.
+          </p>
+          <div class="card">
+            <h3>Схема пайплайна</h3>
+            <pre class="code">
+загрузка CSV → проверка типов и пропусков
 срез year == 2007 и year == 1952
 группировка по continent (средние, сумма населения, взвешенное среднее lifeExp)
 рейтинги nlargest / nsmallest по lifeExp и gdpPercap
 слияние 1952 и 2007 по country → прирост продолжительности жизни
 агрегаты по year → динамика средних по годам
-графики → ExcelWriter → rezultaty_gapminder_2007.xlsx</pre>
+графики → ExcelWriter → rezultaty_gapminder_2007.xlsx</pre
+            >
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="rezultaty">
+      <section id="rezultaty">
+        <div class="wrap">
+          <h2 class="section-title">Результаты и графики</h2>
+
+          <div class="graf-gallery">
+            <div class="graf-item">
+              <img src="grafik_01.png" width="900" height="450" loading="lazy" alt="" />
+              <p class="graf-cap">
+                Рисунок 1. Средняя ожидаемая продолжительность жизни по странам набора по годам.
+              </p>
+            </div>
+            <div class="graf-item">
+              <img src="grafik_02.png" width="900" height="450" loading="lazy" alt="" />
+              <p class="graf-cap">
+                Рисунок 2. Средняя продолжительность жизни и суммарное население по континентам,
+                2007 год.
+              </p>
+            </div>
+            <div class="graf-item">
+              <img src="grafik_03.png" width="900" height="450" loading="lazy" alt="" />
+              <p class="graf-cap">
+                Рисунок 3. Распределение продолжительности жизни по странам внутри континента, 2007
+                год.
+              </p>
+            </div>
+            <div class="graf-item">
+              <img src="grafik_04.png" width="900" height="600" loading="lazy" alt="" />
+              <p class="graf-cap">
+                Рисунок 4. ВВП на душу населения и продолжительность жизни по странам, 2007 год.
+              </p>
+            </div>
+            <div class="graf-item">
+              <img src="grafik_05.png" width="900" height="450" loading="lazy" alt="" />
+              <p class="graf-cap">
+                Рисунок 5. Гистограмма продолжительности жизни по странам, 2007 год.
+              </p>
+            </div>
+            <div class="graf-item">
+              <img src="grafik_06.png" width="900" height="480" loading="lazy" alt="" />
+              <p class="graf-cap">
+                Рисунок 6. Динамика продолжительности жизни в ряде крупных стран.
+              </p>
+            </div>
+            <div
+              class="graf-item"
+              style="grid-column: 1 / -1; max-width: 920px; margin-inline: auto">
+              <img src="grafik_07.png" width="900" height="450" loading="lazy" alt="" />
+              <p class="graf-cap">
+                Рисунок 7. Страны с наибольшим приростом продолжительности жизни между 1952 и 2007
+                годами.
+              </p>
+            </div>
+          </div>
+
+          <h3 class="section-title" style="font-size: 1.35rem; margin-top: 2.5rem">
+            Сводка по континентам, 2007 год
+          </h3>
+          <p class="section-lead" style="margin-bottom: 0.5rem">
+            Средняя продолжительность жизни, взвешенная по численности населения стран континента.
+          </p>
+          <div class="card" style="max-width: 720px">
+            <table class="results">
+              <thead>
+                <tr>
+                  <th>Континент</th>
+                  <th>Взвеш. среднее, лет</th>
+                  <th>Простое среднее, лет</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Oceania</td>
+                  <td>81,06</td>
+                  <td>80,72</td>
+                </tr>
+                <tr>
+                  <td>Europe</td>
+                  <td>77,89</td>
+                  <td>77,65</td>
+                </tr>
+                <tr>
+                  <td>Americas</td>
+                  <td>75,36</td>
+                  <td>73,61</td>
+                </tr>
+                <tr>
+                  <td>Asia</td>
+                  <td>69,44</td>
+                  <td>70,73</td>
+                </tr>
+                <tr>
+                  <td>Africa</td>
+                  <td>54,56</td>
+                  <td>54,81</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="proverka">
+        <div class="wrap">
+          <h2 class="section-title">Сопоставление результатов с гипотезами</h2>
+          <div class="card" style="max-width: 900px">
+            <p>
+              <strong>Гипотеза 1</strong> — подтверждается: простые средние по годам для всего
+              набора стран монотонно возрастают с 49,06 лет (1952) до 67,01 лет (2007) без снижений
+              между соседними пятилетками.
+            </p>
+            <p>
+              <strong>Гипотеза 2</strong> — подтверждается: в 2007 году взвешенное по населению
+              среднее для Африки 54,56 лет, для Европы 77,89 лет (простые средние 54,81 и 77,65
+              лет).
+            </p>
+            <p style="margin-bottom: 0">
+              <strong>Гипотеза 3</strong> — подтверждается: среди пятнадцати стран с наибольшим
+              приростом четырнадцать относятся к Азии или к Африке.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="primnenie">
+        <div class="wrap">
+          <h2 class="section-title">Применение результатов</h2>
+          <p class="section-lead">
+            Сопоставление стран по демографии и экономике в единой методике удобно для учебных
+            обзоров и первичной ориентации в различиях между регионами. Взвешенные по населению
+            средние учитывают вклад крупных стран; сопоставление 1952 и 2007 годов показывает
+            долгосрочные изменения. Графики дополняют таблицы наглядной формой.
+          </p>
+        </div>
+      </section>
+
+      <section id="istochniki">
+        <div class="wrap">
+          <h2 class="section-title">Источники</h2>
+          <div class="card">
+            <ul class="links-list">
+              <li><a href="https://pandas.pydata.org/docs/">pandas</a></li>
+              <li><a href="https://matplotlib.org/stable/users/index.html">Matplotlib</a></li>
+              <li><a href="https://seaborn.pydata.org/">seaborn</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site">
       <div class="wrap">
-        <h2 class="section-title">Результаты и графики</h2>
-
-        <div class="graf-gallery">
-          <div class="graf-item">
-            <img src="grafik_01.png" width="900" height="450" loading="lazy" alt="" />
-            <p class="graf-cap">Рисунок 1. Средняя ожидаемая продолжительность жизни по странам набора по годам.</p>
-          </div>
-          <div class="graf-item">
-            <img src="grafik_02.png" width="900" height="450" loading="lazy" alt="" />
-            <p class="graf-cap">Рисунок 2. Средняя продолжительность жизни и суммарное население по континентам, 2007 год.</p>
-          </div>
-          <div class="graf-item">
-            <img src="grafik_03.png" width="900" height="450" loading="lazy" alt="" />
-            <p class="graf-cap">Рисунок 3. Распределение продолжительности жизни по странам внутри континента, 2007 год.</p>
-          </div>
-          <div class="graf-item">
-            <img src="grafik_04.png" width="900" height="600" loading="lazy" alt="" />
-            <p class="graf-cap">Рисунок 4. ВВП на душу населения и продолжительность жизни по странам, 2007 год.</p>
-          </div>
-          <div class="graf-item">
-            <img src="grafik_05.png" width="900" height="450" loading="lazy" alt="" />
-            <p class="graf-cap">Рисунок 5. Гистограмма продолжительности жизни по странам, 2007 год.</p>
-          </div>
-          <div class="graf-item">
-            <img src="grafik_06.png" width="900" height="480" loading="lazy" alt="" />
-            <p class="graf-cap">Рисунок 6. Динамика продолжительности жизни в ряде крупных стран.</p>
-          </div>
-          <div class="graf-item" style="grid-column: 1 / -1; max-width: 920px; margin-inline: auto">
-            <img src="grafik_07.png" width="900" height="450" loading="lazy" alt="" />
-            <p class="graf-cap">Рисунок 7. Страны с наибольшим приростом продолжительности жизни между 1952 и 2007 годами.</p>
-          </div>
-        </div>
-
-        <h3 class="section-title" style="font-size: 1.35rem; margin-top: 2.5rem">Сводка по континентам, 2007 год</h3>
-        <p class="section-lead" style="margin-bottom: 0.5rem">
-          Средняя продолжительность жизни, взвешенная по численности населения стран континента.
-        </p>
-        <div class="card" style="max-width: 720px">
-          <table class="results">
-            <thead>
-              <tr>
-                <th>Континент</th>
-                <th>Взвеш. среднее, лет</th>
-                <th>Простое среднее, лет</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Oceania</td><td>81,06</td><td>80,72</td></tr>
-              <tr><td>Europe</td><td>77,89</td><td>77,65</td></tr>
-              <tr><td>Americas</td><td>75,36</td><td>73,61</td></tr>
-              <tr><td>Asia</td><td>69,44</td><td>70,73</td></tr>
-              <tr><td>Africa</td><td>54,56</td><td>54,81</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <a href="#top">Наверх</a>
       </div>
-    </section>
-
-    <section id="proverka">
-      <div class="wrap">
-        <h2 class="section-title">Сопоставление результатов с гипотезами</h2>
-        <div class="card" style="max-width: 900px">
-          <p><strong>Гипотеза 1</strong> — подтверждается: простые средние по годам для всего набора стран монотонно возрастают с 49,06 лет (1952) до 67,01 лет (2007) без снижений между соседними пятилетками.</p>
-          <p><strong>Гипотеза 2</strong> — подтверждается: в 2007 году взвешенное по населению среднее для Африки 54,56 лет, для Европы 77,89 лет (простые средние 54,81 и 77,65 лет).</p>
-          <p style="margin-bottom: 0"><strong>Гипотеза 3</strong> — подтверждается: среди пятнадцати стран с наибольшим приростом четырнадцать относятся к Азии или к Африке.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="primnenie">
-      <div class="wrap">
-        <h2 class="section-title">Применение результатов</h2>
-        <p class="section-lead">
-          Сопоставление стран по демографии и экономике в единой методике удобно для учебных обзоров и первичной ориентации в различиях между регионами. Взвешенные по населению средние учитывают вклад крупных стран; сопоставление 1952 и 2007 годов показывает долгосрочные изменения. Графики дополняют таблицы наглядной формой.
-        </p>
-      </div>
-    </section>
-
-    <section id="istochniki">
-      <div class="wrap">
-        <h2 class="section-title">Источники</h2>
-        <div class="card">
-          <ul class="links-list">
-            <li><a href="https://pandas.pydata.org/docs/">pandas</a></li>
-            <li><a href="https://matplotlib.org/stable/users/index.html">Matplotlib</a></li>
-            <li><a href="https://seaborn.pydata.org/">seaborn</a></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site">
-    <div class="wrap">
-      <a href="#top">Наверх</a>
-    </div>
-  </footer>
-</body>
+    </footer>
+  </body>
 </html>
