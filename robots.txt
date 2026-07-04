@@ -1,0 +1,26 @@
+# Robots.txt for Причал 45
+# https://prichal45.ru
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://prichal45.ru/sitemap.xml
+
+# Disallow admin and system files
+Disallow: /*.pdf$
+Disallow: /*.docx$
+
+# Allow all search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Mail.RU_Bot
+Allow: /
+
