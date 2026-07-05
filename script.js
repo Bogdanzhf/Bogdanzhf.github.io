@@ -93,6 +93,37 @@
     
     const navToggle = document.getElementById('navToggle');
     const navList = document.getElementById('navList');
+    const navContainer = document.querySelector('.nav');
+    let mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
+
+    if (navList && !mobileMenuBackdrop) {
+        mobileMenuBackdrop = document.createElement('div');
+        mobileMenuBackdrop.className = 'mobile-menu-backdrop';
+        mobileMenuBackdrop.id = 'mobileMenuBackdrop';
+        document.body.appendChild(mobileMenuBackdrop);
+    }
+
+    function isMobileNav() {
+        return window.innerWidth <= 768;
+    }
+
+    function placeNavList() {
+        if (!navList || !navContainer || !navToggle) return;
+
+        if (isMobileNav()) {
+            if (navList.parentElement !== document.body) {
+                document.body.appendChild(navList);
+            }
+        } else {
+            closeMobileMenu();
+            if (navList.parentElement !== navContainer) {
+                navContainer.insertBefore(navList, navToggle);
+            }
+        }
+    }
+
+    placeNavList();
+    window.addEventListener('resize', placeNavList);
 
     function closeMobileMenu() {
         if (!navList || !navToggle) return;
@@ -124,6 +155,10 @@
         }
 
         navToggle.addEventListener('click', toggleMobileMenu);
+
+        if (mobileMenuBackdrop) {
+            mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
+        }
 
         navList.querySelectorAll('.nav__link').forEach(function(link) {
             link.addEventListener('click', closeMobileMenu);
