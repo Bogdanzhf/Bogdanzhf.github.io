@@ -70,6 +70,8 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body {
@@ -1443,16 +1445,34 @@ p {
 
 @media (max-width: 768px) {
     :root {
-        --spacing-xxl: 3rem;
-        --header-height: 72px;
+        --spacing-xxl: 3.5rem;
+        --header-height: 68px;
     }
 
     body.menu-open {
         overflow: hidden;
     }
 
+    body.menu-open .header {
+        z-index: 1002;
+    }
+
+    .header {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
     .header__inner {
         position: relative;
+        padding: 0.75rem var(--spacing-md);
+    }
+
+    .header__logo img {
+        height: 44px;
+    }
+
+    .header__logo-text {
+        font-size: 1.3rem;
     }
 
     .nav {
@@ -1466,15 +1486,15 @@ p {
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(250, 247, 242, 0.98);
-        backdrop-filter: blur(12px);
+        background-color: var(--color-cream);
         flex-direction: column;
         align-items: stretch;
-        padding: var(--spacing-lg) var(--spacing-md);
+        padding: var(--spacing-md);
         gap: 0;
         box-shadow: var(--shadow-lg);
         z-index: 1001;
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .nav__list li {
@@ -1483,8 +1503,9 @@ p {
 
     .nav__list .nav__link {
         display: block;
-        padding: var(--spacing-md) var(--spacing-sm);
-        font-size: 1.1rem;
+        padding: 1.125rem var(--spacing-md);
+        font-size: 1.25rem;
+        font-weight: 600;
     }
     
     .nav__list.active {
@@ -1510,10 +1531,100 @@ p {
     .nav__phone {
         display: none;
     }
+
+    .hero {
+        min-height: 100svh;
+        min-height: 100dvh;
+        align-items: flex-start;
+        padding-top: calc(var(--header-height) + var(--spacing-md));
+    }
+
+    .hero__content {
+        padding: var(--spacing-md) var(--spacing-sm) var(--spacing-xl);
+        width: 100%;
+    }
+
+    .hero__logo {
+        width: 130px;
+        height: 130px;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .hero__title {
+        font-size: clamp(2.75rem, 11vw, 3.75rem);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .hero__tagline {
+        font-size: clamp(1.35rem, 5vw, 1.65rem);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .hero__description {
+        font-size: 1.0625rem;
+        line-height: 1.75;
+        margin-bottom: var(--spacing-lg);
+        padding: 0 var(--spacing-xs);
+    }
+
+    .hero__scroll {
+        display: none;
+    }
     
     .hero__buttons {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
+        width: 100%;
+        gap: var(--spacing-sm);
+    }
+
+    .btn {
+        font-size: 1rem;
+        padding: 1rem 1.5rem;
+        width: 100%;
+    }
+
+    .btn--large {
+        font-size: 1.0625rem;
+        padding: 1.125rem 1.5rem;
+    }
+
+    .page-header {
+        padding-top: calc(var(--header-height) + var(--spacing-xl));
+    }
+
+    .section {
+        padding: var(--spacing-xl) 0;
+    }
+
+    .section__title {
+        font-size: clamp(1.85rem, 6vw, 2.25rem);
+    }
+
+    .about__text {
+        font-size: 1.0625rem;
+        line-height: 1.75;
+    }
+
+    .feature-card {
+        padding: var(--spacing-lg);
+    }
+
+    .feature-card__title {
+        font-size: 1.35rem;
+    }
+
+    .feature-card__text {
+        font-size: 1rem;
+        line-height: 1.65;
+    }
+
+    .room-card__title {
+        font-size: 1.5rem;
+    }
+
+    .footer__highlight {
+        font-size: 0.9375rem;
     }
     
     .features {
@@ -1549,17 +1660,17 @@ p {
 }
 
 @media (max-width: 480px) {
-    html {
-        font-size: 14px;
+    .container {
+        padding: 0 1.125rem;
     }
-    
-    .btn {
-        width: 100%;
-    }
-    
+
     .hero__logo {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
+    }
+
+    .hero__title {
+        font-size: 2.75rem;
     }
     
     .distances-grid {
@@ -1571,11 +1682,19 @@ p {
     }
 
     .photo-duo img {
-        height: 220px;
+        height: 240px;
     }
 
     .footer__highlights {
         grid-template-columns: 1fr;
+    }
+
+    .sports-feature h4 {
+        font-size: 1.2rem;
+    }
+
+    .sports-feature p {
+        font-size: 1rem;
     }
 }
 
