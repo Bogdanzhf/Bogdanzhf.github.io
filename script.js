@@ -93,27 +93,52 @@
     
     const navToggle = document.getElementById('navToggle');
     const navList = document.getElementById('navList');
-    
+
+    function closeMobileMenu() {
+        if (!navList || !navToggle) return;
+        navList.classList.remove('active');
+        navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+    }
+
+    function openMobileMenu() {
+        if (!navList || !navToggle) return;
+        navList.classList.add('active');
+        navToggle.classList.add('active');
+        navToggle.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('menu-open');
+    }
+
     if (navToggle && navList) {
-        navToggle.addEventListener('click', function() {
-            navList.classList.toggle('active');
-            this.classList.toggle('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+
+        function toggleMobileMenu(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (navList.classList.contains('active')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        }
+
+        navToggle.addEventListener('click', toggleMobileMenu);
+
+        navList.querySelectorAll('.nav__link').forEach(function(link) {
+            link.addEventListener('click', closeMobileMenu);
         });
-        
-        // Close menu when clicking on a link
-        const navLinks = navList.querySelectorAll('.nav__link');
-        navLinks.forEach(function(link) {
-            link.addEventListener('click', function() {
-                navList.classList.remove('active');
-                navToggle.classList.remove('active');
-            });
-        });
-        
-        // Close menu when clicking outside
+
         document.addEventListener('click', function(e) {
+            if (!navList.classList.contains('active')) return;
             if (!navToggle.contains(e.target) && !navList.contains(e.target)) {
-                navList.classList.remove('active');
-                navToggle.classList.remove('active');
+                closeMobileMenu();
+            }
+        });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeMobileMenu();
             }
         });
     }
@@ -211,51 +236,6 @@
     });
 
     // ==========================================================================
-    // Online Visitors Counter (Simulated)
-    // ==========================================================================
-    
-    const visitorCount = document.getElementById('visitorCount');
-    
-    if (visitorCount) {
-        // Generate a pseudo-random visitor count based on time
-        function getVisitorCount() {
-            const now = new Date();
-            const hour = now.getHours();
-            const minute = now.getMinutes();
-            
-            // Base count varies by hour (more visitors during day)
-            let baseCount;
-            if (hour >= 9 && hour <= 21) {
-                baseCount = 3 + Math.floor(Math.random() * 5); // 3-7 during day
-            } else {
-                baseCount = 1 + Math.floor(Math.random() * 2); // 1-2 at night
-            }
-            
-            // Add some variance based on minute
-            const variance = Math.floor((minute % 10) / 3);
-            
-            return baseCount + variance;
-        }
-        
-        // Initial count
-        visitorCount.textContent = getVisitorCount();
-        
-        // Update every 30 seconds
-        setInterval(function() {
-            visitorCount.textContent = getVisitorCount();
-        }, 30000);
-        
-        // Using localStorage to maintain session
-        const sessionKey = 'prichal45_session';
-        let sessionId = localStorage.getItem(sessionKey);
-        
-        if (!sessionId) {
-            sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-            localStorage.setItem(sessionKey, sessionId);
-        }
-    }
-
-    // ==========================================================================
     // Lazy Loading Images
     // ==========================================================================
     
@@ -290,22 +270,6 @@
     // Phone Number Click Tracking
     // ==========================================================================
     
-    document.querySelectorAll('a[href^="tel:"]').forEach(function(phoneLink) {
-        phoneLink.addEventListener('click', function() {
-            // Track phone clicks for analytics
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'phone_call', {
-                    'event_category': 'contact',
-                    'event_label': this.getAttribute('href')
-                });
-            }
-            
-            if (typeof ym !== 'undefined') {
-                ym(00000000, 'reachGoal', 'phone_click');
-            }
-        });
-    });
-
     // ==========================================================================
     // Console Message
     // ==========================================================================
